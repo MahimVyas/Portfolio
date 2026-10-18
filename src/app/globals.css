@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+/* Theme is driven by a class on <html> (set by the inline script in layout.tsx)
+   so light/dark follows the device preference automatically, with an optional
+   manual override saved in localStorage. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-geist-sans), ui-sans-serif,
+    sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #fafafa;
+    color: #0f172a;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    background-color: #07070d;
+    color: #e2e8f0;
+  }
+
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.28);
+  }
+
+  :focus-visible {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  .section {
+    position: relative;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1.5rem;
+  }
+
+  .card {
+    border-radius: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .dark .card {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background-color: #ffffff;
+    padding: 0.25rem 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: #475569;
+    transition: all 0.25s ease;
+  }
+
+  .dark .chip {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+  }
+
+  .chip:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    color: #6d28d9;
+    transform: translateY(-1px);
+  }
+
+  .dark .chip:hover {
+    border-color: rgba(139, 92, 246, 0.55);
+    color: #c4b5fd;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-image: linear-gradient(135deg, #8b5cf6, #6366f1 55%, #06b6d4);
+    color: #ffffff;
+    box-shadow: 0 10px 24px -8px rgba(139, 92, 246, 0.55);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -8px rgba(139, 92, 246, 0.6);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgba(15, 23, 42, 0.18);
+    color: #334155;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(15, 23, 42, 0.5);
+    background-color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .dark .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #e2e8f0;
+  }
+
+  .dark .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.45);
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background-image: linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6366f1 50%,
+      #06b6d4
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(
+      rgba(15, 23, 42, 0.14) 1px,
+      transparent 1px
+    );
+    background-size: 26px 26px;
+    mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 35%,
+      black 25%,
+      transparent 75%
+    );
+  }
+
+  .dark .bg-dots {
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.12) 1px,
+      transparent 1px
+    );
+  }
+}
+
+/* Ambient background orbs */
+@keyframes orb-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -42px, 0) scale(1.08);
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  will-change: transform;
+  animation: orb-float 13s ease-in-out infinite;
+}
+
+/* Soft ring pulse behind timeline dots */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: rgba(139, 92, 246, 0.45);
+  animation: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Honor the device's motion preference for CSS-driven animation */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
