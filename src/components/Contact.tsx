@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Check, Copy, Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/data/site";
+import { tones, type Tone } from "@/lib/tones";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import SocialLinks from "./SocialLinks";
@@ -24,6 +25,7 @@ export default function Contact() {
   const cards = [
     {
       key: "email",
+      tone: "violet" as Tone,
       label: "Email",
       value: profile.email,
       sub: copied ? "Copied to clipboard" : "Click to copy",
@@ -34,6 +36,7 @@ export default function Contact() {
     },
     {
       key: "phone",
+      tone: "fuchsia" as Tone,
       label: "Phone",
       value: profile.phone,
       sub: "Call or text",
@@ -44,6 +47,7 @@ export default function Contact() {
     },
     {
       key: "location",
+      tone: "emerald" as Tone,
       label: "Location",
       value: profile.location,
       sub: "IST · UTC +5:30",
@@ -72,6 +76,7 @@ export default function Contact() {
       <div className="section relative z-10">
         <SectionHeading
           eyebrow="Contact"
+          tone="emerald"
           title={
             <>
               Let&apos;s build something{" "}
@@ -83,13 +88,14 @@ export default function Contact() {
 
         <div className="mx-auto mt-14 grid max-w-4xl gap-5 sm:grid-cols-3">
           {cards.map((c, i) => {
+            const t = tones[c.tone];
             const body = (
               <>
                 <span
                   className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl transition-all duration-300 ${
                     c.highlight
                       ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
-                      : "bg-gradient-to-br from-violet-600/10 to-cyan-500/10 text-violet-600 group-hover:from-violet-600 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-violet-500/30 dark:from-violet-500/15 dark:to-cyan-500/15 dark:text-violet-300 dark:group-hover:text-white"
+                      : `bg-gradient-to-br ${t.tint} ${t.tintText} ${t.tintHover} ${t.tintHoverShadow} group-hover:text-white dark:group-hover:text-white`
                   }`}
                 >
                   {c.highlight ? (
@@ -120,8 +126,7 @@ export default function Contact() {
               </>
             );
 
-            const base =
-              "card group flex w-full items-center gap-4 p-5 text-left transition duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:shadow-[0_28px_52px_-30px_rgba(139,92,246,0.55)]";
+            const base = `card group flex w-full items-center gap-4 p-5 text-left transition duration-300 hover:-translate-y-1 ${t.hoverBorder} ${t.hoverShadow}`;
 
             return (
               <Reveal key={c.key} delay={0.1 + i * 0.09}>

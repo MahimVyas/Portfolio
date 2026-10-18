@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import {
   BookOpen,
@@ -9,6 +10,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { education, experience } from "@/data/site";
+import { tones, type Tone } from "@/lib/tones";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
@@ -20,6 +22,12 @@ type JourneyItem = {
   meta: string;
   location?: string;
   bullets?: string[];
+};
+
+/** Work entries are fuchsia, education entries are amber. */
+const kindTone: Record<JourneyItem["kind"], Tone> = {
+  work: "fuchsia",
+  education: "amber",
 };
 
 const items: JourneyItem[] = [
@@ -52,6 +60,7 @@ export default function Journey() {
       <div className="section">
         <SectionHeading
           eyebrow="Journey"
+          tone="amber"
           title={
             <>
               Experience &amp; <span className="text-gradient">education</span>
@@ -64,7 +73,7 @@ export default function Journey() {
           {/* Drawn-in vertical line */}
           <motion.span
             aria-hidden
-            className="absolute bottom-4 left-[19.5px] top-4 w-px origin-top bg-gradient-to-b from-violet-600 via-indigo-500 to-cyan-400"
+            className="absolute bottom-4 left-[19.5px] top-4 w-px origin-top bg-gradient-to-b from-fuchsia-500 via-violet-500 to-amber-500"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -72,14 +81,19 @@ export default function Journey() {
           />
 
           <div className="space-y-6">
-            {items.map((item, i) => (
+            {items.map((item, i) => {
+              const t = tones[kindTone[item.kind]];
+              return (
               <Reveal
                 key={item.id}
                 delay={0.12 + i * 0.12}
                 className="relative pl-14"
               >
                 {/* Timeline dot with soft pulse */}
-                <span className="absolute left-0 top-1.5 z-10 grid h-10 w-10 place-items-center rounded-full border border-violet-500/30 bg-white text-violet-600 shadow-[0_8px_20px_-8px_rgba(139,92,246,0.6)] dark:bg-[#0d0d16] dark:text-violet-300">
+                <span
+                  className={`absolute left-0 top-1.5 z-10 grid h-10 w-10 place-items-center rounded-full border bg-white ${t.dotBorder} ${t.dotShadow} ${t.tintText} dark:bg-[#0d0d16]`}
+                  style={{ "--pulse": t.pulse } as CSSProperties}
+                >
                   {item.kind === "work" ? (
                     <Briefcase size={16} />
                   ) : (
@@ -91,7 +105,7 @@ export default function Journey() {
                   />
                 </span>
 
-                <article className="card group p-5 transition duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:shadow-[0_28px_52px_-30px_rgba(139,92,246,0.55)] sm:p-6">
+                <article className={`card group p-5 transition duration-300 hover:-translate-y-1 ${t.hoverBorder} ${t.hoverShadow} sm:p-6`}>
                   <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
                     <h3 className="font-display text-base font-bold leading-snug tracking-tight text-slate-900 sm:text-lg dark:text-white">
                       {item.title}
@@ -124,7 +138,7 @@ export default function Journey() {
                         <li key={b} className="flex gap-2.5">
                           <span
                             aria-hidden
-                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400"
+                            className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r ${t.dot}`}
                           />
                           <span>{b}</span>
                         </li>
@@ -133,7 +147,8 @@ export default function Journey() {
                   ) : null}
                 </article>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

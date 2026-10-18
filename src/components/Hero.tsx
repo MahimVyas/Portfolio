@@ -49,8 +49,13 @@ export default function Hero() {
       />
       <div
         aria-hidden
-        className="orb bottom-[-6rem] left-1/3 h-72 w-72 bg-fuchsia-400/20 dark:bg-indigo-600/25"
+        className="orb bottom-[-6rem] left-1/3 h-72 w-72 bg-fuchsia-400/25 dark:bg-fuchsia-500/20"
         style={{ animationDelay: "-9s" }}
+      />
+      <div
+        aria-hidden
+        className="orb -left-24 bottom-4 h-64 w-64 bg-amber-400/20 dark:bg-amber-500/15"
+        style={{ animationDelay: "-6.5s" }}
       />
       <div
         aria-hidden

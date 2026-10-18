@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { tones, type Tone } from "@/lib/tones";
 import Reveal from "./Reveal";
 
 type SectionHeadingProps = {
@@ -9,6 +10,8 @@ type SectionHeadingProps = {
   title: ReactNode;
   description?: string;
   align?: "left" | "center";
+  /** Accent colour for the eyebrow label and divider lines. */
+  tone?: Tone;
 };
 
 /** Eyebrow line + animated title used at the top of every section. */
@@ -17,8 +20,10 @@ export default function SectionHeading({
   title,
   description,
   align = "center",
+  tone = "violet",
 }: SectionHeadingProps) {
   const centered = align === "center";
+  const t = tones[tone];
 
   return (
     <Reveal className={centered ? "text-center" : undefined}>
@@ -29,18 +34,20 @@ export default function SectionHeading({
       >
         <motion.span
           aria-hidden
-          className="h-px w-10 origin-left bg-gradient-to-r from-violet-600 to-cyan-400"
+          className={`h-px w-10 origin-left bg-gradient-to-r ${t.line}`}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         />
-        <span className="text-xs font-bold uppercase tracking-[0.22em] text-violet-600 dark:text-violet-400">
+        <span
+          className={`text-xs font-bold uppercase tracking-[0.22em] ${t.eyebrow}`}
+        >
           {eyebrow}
         </span>
         <motion.span
           aria-hidden
-          className={`h-px w-10 origin-right bg-gradient-to-l from-cyan-400 to-violet-600 ${
+          className={`h-px w-10 origin-right bg-gradient-to-l ${t.line} ${
             centered ? "" : "hidden"
           }`}
           initial={{ scaleX: 0 }}

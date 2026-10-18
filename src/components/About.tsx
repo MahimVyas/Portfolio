@@ -2,6 +2,7 @@
 
 import { Cpu, GraduationCap, MapPin } from "lucide-react";
 import { facts, profile } from "@/data/site";
+import { tones, type Tone } from "@/lib/tones";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
@@ -10,6 +11,13 @@ const iconMap = {
   map: MapPin,
   cpu: Cpu,
 } as const;
+
+/** Each fact card gets its own accent colour. */
+const factTones: Record<keyof typeof iconMap, Tone> = {
+  graduation: "amber",
+  map: "emerald",
+  cpu: "cyan",
+};
 
 const highlights = [
   "Local-first",
@@ -64,10 +72,11 @@ export default function About() {
           <div className="flex flex-col gap-6 lg:col-span-2">
             {facts.map((f, i) => {
               const Icon = iconMap[f.icon as keyof typeof iconMap];
+              const t = tones[factTones[f.icon as keyof typeof factTones]];
               return (
                 <Reveal key={f.label} delay={0.14 + i * 0.09} className="flex-1">
-                  <div className="card group flex h-full items-start gap-4 p-5 transition duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:shadow-[0_24px_44px_-28px_rgba(139,92,246,0.55)] sm:p-6">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-violet-600/10 to-cyan-500/10 text-violet-600 transition-all duration-300 group-hover:from-violet-600 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-violet-500/30 dark:from-violet-500/15 dark:to-cyan-500/15 dark:text-violet-300 dark:group-hover:text-white">
+                  <div className={`card group flex h-full items-start gap-4 p-5 transition duration-300 hover:-translate-y-1 ${t.hoverBorder} ${t.hoverShadow} sm:p-6`}>
+                    <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${t.tint} ${t.tintText} transition-all duration-300 ${t.tintHover} ${t.tintHoverShadow} group-hover:text-white dark:group-hover:text-white`}>
                       <Icon size={18} />
                     </span>
                     <div>

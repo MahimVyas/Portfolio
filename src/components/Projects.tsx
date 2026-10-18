@@ -5,8 +5,12 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Calendar, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { projects, type Project } from "@/data/site";
+import { tones, type Tone } from "@/lib/tones";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+
+/** Projects cycle through accent colours in the grid. */
+const projectTones: Tone[] = ["fuchsia", "cyan", "amber", "emerald"];
 
 /** Tracks the cursor so the glow follows the pointer inside each card. */
 function trackPointer(e: MouseEvent<HTMLElement>) {
@@ -16,20 +20,24 @@ function trackPointer(e: MouseEvent<HTMLElement>) {
   el.style.setProperty("--my", `${e.clientY - rect.top}px`);
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, tone }: { project: Project; tone: Tone }) {
   const featured = project.featured === true;
+  const t = tones[tone];
 
   return (
     <motion.article
       onMouseMove={trackPointer}
-      className={`group card relative flex h-full flex-col overflow-hidden p-6 transition duration-300 hover:-translate-y-1.5 hover:border-violet-400/60 hover:shadow-[0_32px_60px_-32px_rgba(139,92,246,0.6)] sm:p-8 ${
-        featured ? "lg:col-span-2 ring-1 ring-violet-500/15 dark:ring-violet-400/15" : ""
+      className={`group card relative flex h-full flex-col overflow-hidden p-6 transition duration-300 hover:-translate-y-1.5 ${t.hoverBorder} ${t.hoverShadow} sm:p-8 ${
+        featured ? `lg:col-span-2 ${t.ring}` : ""
       }`}
     >
       {/* Pointer-following glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_circle_at_var(--mx,50%)_var(--my,0%),rgba(139,92,246,0.16),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          backgroundImage: `radial-gradient(460px circle at var(--mx,50%) var(--my,0%), ${t.glow}, transparent 65%)`,
+        }}
       />
 
       <div className="relative flex items-start justify-between gap-4">
@@ -45,12 +53,12 @@ function ProjectCard({ project }: { project: Project }) {
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-slate-900 transition-colors hover:text-violet-600 dark:text-white dark:hover:text-violet-300"
+                className={`inline-flex items-center gap-1.5 text-slate-900 transition-colors ${t.hoverText} dark:text-white`}
               >
                 {project.title}
                 <ArrowUpRight
                   size={18}
-                  className="text-slate-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-violet-500 dark:text-slate-500"
+                  className={`text-slate-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${t.arrow} dark:text-slate-500`}
                 />
               </a>
             ) : (
@@ -71,7 +79,7 @@ function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               aria-label={`${project.title} — live demo`}
               title="Live demo"
-              className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400 hover:text-violet-600 dark:border-white/15 dark:bg-white/5 dark:text-slate-400 dark:hover:border-violet-500 dark:hover:text-violet-300"
+              className={`grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-all duration-300 hover:-translate-y-0.5 ${t.actionHover} dark:border-white/15 dark:bg-white/5 dark:text-slate-400`}
             >
               <ExternalLink size={15} />
             </a>
@@ -83,7 +91,7 @@ function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               aria-label={`${project.title} — source code`}
               title="Source code"
-              className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400 hover:text-violet-600 dark:border-white/15 dark:bg-white/5 dark:text-slate-400 dark:hover:border-violet-500 dark:hover:text-violet-300"
+              className={`grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-all duration-300 hover:-translate-y-0.5 ${t.actionHover} dark:border-white/15 dark:bg-white/5 dark:text-slate-400`}
             >
               <FaGithub className="text-[15px]" />
             </a>
@@ -100,7 +108,7 @@ function ProjectCard({ project }: { project: Project }) {
           <li key={b} className="flex gap-2.5">
             <span
               aria-hidden
-              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400"
+              className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r ${t.dot}`}
             />
             <span>{b}</span>
           </li>
@@ -125,6 +133,7 @@ export default function Projects() {
       <div className="section">
         <SectionHeading
           eyebrow="Selected work"
+          tone="fuchsia"
           title={
             <>
               Projects I&apos;ve <span className="text-gradient">shipped</span>
@@ -140,7 +149,10 @@ export default function Projects() {
               delay={i * 0.1}
               className={p.featured ? "lg:col-span-2" : undefined}
             >
-              <ProjectCard project={p} />
+              <ProjectCard
+                project={p}
+                tone={projectTones[i % projectTones.length]}
+              />
             </Reveal>
           ))}
         </div>
