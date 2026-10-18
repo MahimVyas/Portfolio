@@ -57,7 +57,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden border-t border-slate-200/70 py-24 md:py-28 dark:border-white/10"
+      className="relative scroll-mt-6 overflow-hidden border-t border-slate-200/70 py-24 md:py-28 dark:border-white/10"
     >
       <div
         aria-hidden

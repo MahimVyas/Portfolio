@@ -166,9 +166,9 @@ export const experience = [
     role: "Research Intern – Classical Indian Astronomy & Quantum Computing",
     org: "PCCOE",
     location: "Pune, India",
-    meta: "Research Internship",
+    meta: "Ended Aug 2026",
     bullets: [
-      "Researching classical Indian astronomical models (Sūrya-Siddhānta, Kuṭṭaka algorithm) alongside quantum computing implementations in Python and Qiskit, validated against a Meeus analytical reference.",
+      "Researched classical Indian astronomical models (Sūrya-Siddhānta, Kuṭṭaka algorithm) alongside quantum computing implementations in Python and Qiskit, validated against a Meeus analytical reference.",
     ],
     // The resume carries a placeholder link for the paper — wire in the real URL when available.
     paperLink: null as string | null,

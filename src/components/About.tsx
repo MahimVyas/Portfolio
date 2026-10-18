@@ -23,7 +23,7 @@ const highlights = [
 /** Narrative summary of the resume, plus three quick-fact cards. */
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-24 py-24 md:py-28">
+    <section id="about" className="scroll-mt-6 py-24 md:py-28">
       <div className="section">
         <SectionHeading
           eyebrow="About me"
@@ -46,9 +46,9 @@ export default function About() {
               </p>
               <p className="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">
                 I&apos;m currently completing my B.Tech in Computer Science
-                (AI &amp; ML) at D. Y. Patil International University, while
-                researching classical Indian astronomy alongside quantum
-                computing at PCCOE, Pune.
+                (AI &amp; ML) at D. Y. Patil International University, and
+                completed a research internship in classical Indian astronomy
+                and quantum computing at PCCOE, Pune.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">

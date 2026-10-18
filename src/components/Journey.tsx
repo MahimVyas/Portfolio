@@ -47,7 +47,7 @@ export default function Journey() {
   return (
     <section
       id="journey"
-      className="scroll-mt-24 border-y border-slate-200/70 bg-white/60 py-24 dark:border-white/10 dark:bg-white/[0.015] md:py-28"
+      className="scroll-mt-6 border-y border-slate-200/70 bg-white/60 py-24 dark:border-white/10 dark:bg-white/[0.015] md:py-28"
     >
       <div className="section">
         <SectionHeading
@@ -57,7 +57,7 @@ export default function Journey() {
               Experience &amp; <span className="text-gradient">education</span>
             </>
           }
-          description="Where I've studied and the research I'm contributing to."
+          description="Where I&apos;ve studied and the research I&apos;ve contributed to."
         />
 
         <div className="relative mx-auto mt-14 max-w-3xl">

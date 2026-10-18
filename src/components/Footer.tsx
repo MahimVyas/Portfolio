@@ -43,35 +43,6 @@ export default function Footer() {
           <p>
             © 2026 {profile.name}. All rights reserved.
           </p>
-          <p>
-            Built with{" "}
-            <a
-              href="https://nextjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-slate-700 transition-colors hover:text-violet-600 dark:text-slate-300 dark:hover:text-violet-300"
-            >
-              Next.js
-            </a>
-            ,{" "}
-            <a
-              href="https://tailwindcss.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-slate-700 transition-colors hover:text-violet-600 dark:text-slate-300 dark:hover:text-violet-300"
-            >
-              Tailwind CSS
-            </a>{" "}
-            &amp;{" "}
-            <a
-              href="https://motion.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-slate-700 transition-colors hover:text-violet-600 dark:text-slate-300 dark:hover:text-violet-300"
-            >
-              Framer Motion
-            </a>
-          </p>
         </div>
 
         <details className="mt-6 text-center">

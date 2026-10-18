@@ -7,7 +7,7 @@ Personal portfolio site, rebuilt as a modern **Next.js (App Router)** applicatio
 ## Highlights
 
 - **React / Next.js 16** — App Router, React Server Components, static export, React Compiler
-- **Automatic light & dark mode** — follows the device's system preference live; a header toggle lets visitors force light/dark/system (persisted in `localStorage`)
+- **Automatic light & dark mode** — follows the device's system preference live; a fixed toggle in the top-right corner lets visitors force light/dark/system (persisted in `localStorage`)
 - **Motion** — Framer Motion scroll reveals, animated timeline, hero role rotator, scroll-progress bar, pointer-following card glows (all respecting `prefers-reduced-motion`)
 - **Icons** — [Lucide](https://lucide.dev) for UI/sections, Font Awesome & Simple Icons for GitHub/LinkedIn/CodeChef brand marks
 - **Typography** — Sora for display headings, Geist Sans/Mono for body and code chips via `next/font`
@@ -44,8 +44,9 @@ src/
 │   ├── page.tsx        # section composition
 │   ├── globals.css     # Tailwind theme, dark variant, components
 │   └── icon.svg        # MV monogram favicon
-├── components/         # Nav, Hero, About, Skills, Projects, Journey,
-│                       # Interests, Contact, Footer + motion primitives
+├── components/         # Hero, About, Skills, Projects, Journey, Interests,
+│                       # Contact, Footer + floating theme toggle & motion
+│                       # primitives
 └── data/site.ts        # all resume content in one place
 ```
 

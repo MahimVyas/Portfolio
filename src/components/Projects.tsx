@@ -121,7 +121,7 @@ function ProjectCard({ project }: { project: Project }) {
 /** Grid of resume projects — first card is featured across the full width. */
 export default function Projects() {
   return (
-    <section id="projects" className="scroll-mt-24 py-24 md:py-28">
+    <section id="projects" className="scroll-mt-6 py-24 md:py-28">
       <div className="section">
         <SectionHeading
           eyebrow="Selected work"

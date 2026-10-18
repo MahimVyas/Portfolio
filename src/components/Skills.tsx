@@ -24,7 +24,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="scroll-mt-24 border-y border-slate-200/70 bg-white/60 py-24 dark:border-white/10 dark:bg-white/[0.015] md:py-28"
+      className="scroll-mt-6 border-y border-slate-200/70 bg-white/60 py-24 dark:border-white/10 dark:bg-white/[0.015] md:py-28"
     >
       <div className="section">
         <SectionHeading

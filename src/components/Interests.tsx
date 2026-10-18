@@ -10,7 +10,7 @@ const iconMap = { zap: Zap, rocket: Rocket } as const;
 /** Side interests from the resume, as two hoverable cards. */
 export default function Interests() {
   return (
-    <section id="interests" className="scroll-mt-24 py-24 md:py-28">
+    <section id="interests" className="scroll-mt-6 py-24 md:py-28">
       <div className="section">
         <SectionHeading
           eyebrow="Beyond the resume"
