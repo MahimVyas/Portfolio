@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/site";
-import ScrollProgress from "@/components/ScrollProgress";
-import ThemeToggle from "@/components/ThemeToggle";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const geistSans = Geist({
@@ -94,11 +93,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <ScrollProgress />
-        {/* Theme control floats independently in the top-right corner. */}
-        <div className="fixed right-4 top-4 z-[70]">
-          <ThemeToggle />
-        </div>
+        <Header />
         <main id="main" className="flex-1">
           {children}
         </main>
