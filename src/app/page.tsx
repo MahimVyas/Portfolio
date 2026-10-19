@@ -5,6 +5,7 @@ import Projects from "@/components/Projects";
 import Journey from "@/components/Journey";
 import Interests from "@/components/Interests";
 import Contact from "@/components/Contact";
+import RightSideNav from "@/components/RightSideNav";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Journey />
       <Interests />
       <Contact />
+      <RightSideNav />
     </>
   );
 }
